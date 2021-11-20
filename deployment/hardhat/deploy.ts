@@ -83,23 +83,23 @@ async function main(): Promise<void> {
   console.log(`ContractB Owner: ${contractBOwnerAddress}`);
 
   // use some other address like `addr1` from top
-  await contractA.connect(ownerA).transferOwnership(addr1.address);
+  await contractANew.connect(ownerA).transferOwnership(addr1.address);
   // await contractB.connect(ownerB).addAdmin(addr1.address);
 
   // fetch the new contract owner
-  expect(await contractA.owner()).to.eq(addr1.address);
+  expect(await contractANew.owner()).to.eq(addr1.address);
 
   // // Fetch the admin address of contract A. Should be different from the previous admin address.
   // // Function call 
   // // calling the getter function must return 10.
-  expect(await contractA.get()).to.eq(10);
+  expect(await contractANew.get()).to.eq(10);
 
   // // call the setter function with an input of 81
-  expect(await contractA.connect(addr1).set(81))
-    .to.emit(contractA, 'Set');
+  expect(await contractANew.connect(addr1).set(81))
+    .to.emit(contractANew, 'Set');
 
   // Now, call the getter function, it must return 91.
-  expect(await contractA.get()).to.eq(91);
+  expect(await contractANew.get()).to.eq(91);
 
 }
 
