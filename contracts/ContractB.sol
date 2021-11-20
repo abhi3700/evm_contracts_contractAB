@@ -18,32 +18,16 @@ import 'hardhat/console.sol';
 /**
  * @title Contract B
  */
-
-/*
-Create a contract B, that serves as an access registry. This contract serves as a ledger of the admin details(role, wallet address) of contract A.
-ContractB  must have addAdmin, , removeAdmin, transferAdminRole, renounceAdminRole.
-contractB also has its own admin address. Let us call it superAdmin.
-You can use OpenZeppelin’s access.sol contract,  customise it to your needs.
-
-*/
 contract ContractB {
     // using AddressUpgradeable for address;
     // using SafeMathUpgradeable for uint256;
 
     // ==========State variables====================================
 
-    // bytes16 private constant _HEX_SYMBOLS = "0123456789abcdef";
-
-    // struct RoleData {
-    //     mapping(address => bool) members;
-    //     bytes32 adminRole;
-    // }
-    mapping(bytes32 => mapping(address => bool) ) private _roles;
-
-    bytes32 public constant DEFAULT_ADMIN_ROLE = 0x00;
-
-    bool private initialized;
     address private _admin;
+    mapping(bytes32 => mapping(address => bool) ) private _roles;
+    bytes32 public constant DEFAULT_ADMIN_ROLE = 0x00;
+    bool private initialized;
 
     // ==========Events=============================================
     event AdminAdded(address indexed account, uint256 currentTimestamp);
@@ -69,11 +53,6 @@ contract ContractB {
         _roles[DEFAULT_ADMIN_ROLE][msg.sender] = true;
         initialized = true;
     }
-
-    // modifier onlyRole(bytes32 role) {
-    //     _checkRole(role, msg.sender);
-    //     _;
-    // }
 
     /**
      * @dev Throws if called by any account other than the owner.
@@ -149,7 +128,7 @@ contract ContractB {
     }
 
     // Reserved storage space to allow for layout changes in the future.
-    uint256[46] private ______gap;
+    // uint256[46] private ______gap;
 
 }
 

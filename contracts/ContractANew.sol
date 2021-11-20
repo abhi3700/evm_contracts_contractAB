@@ -15,7 +15,7 @@ import 'hardhat/console.sol';
 contract ContractANew is 
 	Initializable, 
 	OwnableUpgradeable, 
-	PausableUpgradeable, 
+	PausableUpgradeable,
     ReentrancyGuardUpgradeable,
     ContractB 
 {

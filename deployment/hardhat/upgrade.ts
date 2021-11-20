@@ -8,11 +8,11 @@ import { Contract, ContractFactory, BigNumber } from 'ethers';
 
 // TODO: parse the deployed setget contract address for creating instance here
 // const SetGetContract = require("../build/artifacts/contracts/SetGet.sol/SetGet.json")
-// const setgetContractAddress = 'storage-contract-address' || "";
-const setgetContractAddress = '0x3Aa5ebB10DC797CAC828524e59A333d0A371443c' || "";           // tested in localhost
+// const ContractAAddress = 'storage-contract-address' || "";
+const ContractAAddress = '0x3Aa5ebB10DC797CAC828524e59A333d0A371443c' || "";           // tested in localhost
 
 // const ContractBAddress = 'contractB-address' || "";
-const ContractBAddress = '0x59b670e9fA9D0A427751Af201D676719a970857b' || "";           // tested in localhost
+const ContractBAddress = '0xDc64a140Aa3E981100a9becA4E685f962f0cF6C9' || "";           // tested in localhost
 
 async function main(): Promise<void> {
   // Hardhat always runs the compile task when running scripts through it.
@@ -22,19 +22,11 @@ async function main(): Promise<void> {
     
   // ==============================================================================
   // We get the setget contract to upgrade
-  const ContractAFactory: ContractFactory = await ethers.getContractFactory('ContractA',);
-  const contractA: Contract = await upgrades.upgradeProxy(setgetContractAddress, ContractAFactory);
+  const ContractAFactory: ContractFactory = await ethers.getContractFactory('ContractANew',);
+  const contractA: Contract = await upgrades.upgradeProxy(ContractAAddress, ContractAFactory);
   console.log("ContractA upgraded to:", contractA.address);
   console.log(`The transaction that was sent to the network to deploy the upgraded contract A: ${
           contractA.deployTransaction.hash}`);
-
-  // ==============================================================================
-  // We get the contractB contract to upgrade
-  const contractBFactory: ContractFactory = await ethers.getContractFactory("ContractB");
-  const contractB: Contract = await upgrades.upgradeProxy(ContractBAddress, contractBFactory);
-  console.log("ContractB upgraded to:", contractB.address);
-  console.log(`The transaction that was sent to the network to deploy the upgraded contract B: ${
-          contractB.deployTransaction.hash}`);
 
 }
 
