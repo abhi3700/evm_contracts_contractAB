@@ -81,6 +81,8 @@ contract ContractB {
 
 
     function addAdmin(address account) external onlyAdmin returns (bool) {
+        require(account != address(0), "invalid account");
+
         if(!hasRole(DEFAULT_ADMIN_ROLE, account)) {
             _roles[DEFAULT_ADMIN_ROLE][account] = true;
 
@@ -94,6 +96,8 @@ contract ContractB {
     }
 
     function removeAdmin(address account) external onlyAdmin returns (bool) {
+        require(account != address(0), "invalid account");
+
         if(hasRole(DEFAULT_ADMIN_ROLE, account)) {
             _roles[DEFAULT_ADMIN_ROLE][account] = false;
 
@@ -106,6 +110,9 @@ contract ContractB {
     }
 
     function transferAdminRole(address from, address to) external onlyAdmin returns (bool) {
+        require(from != address(0), "invalid account");
+        require(to != address(0), "invalid account");
+
         if(!hasRole(DEFAULT_ADMIN_ROLE, to)) {
             _roles[DEFAULT_ADMIN_ROLE][from] = false; 
             _roles[DEFAULT_ADMIN_ROLE][to] = true;
@@ -118,7 +125,7 @@ contract ContractB {
         return false;
     }
 
-    function renounceAdminRole() external onlyAdmin returns (bool) {
+    function renounceAdminRole() external onlyAdmin returns (bool) {      
         _roles[DEFAULT_ADMIN_ROLE][msg.sender] = false;
         _roles[DEFAULT_ADMIN_ROLE][address(0)] = true;
 
