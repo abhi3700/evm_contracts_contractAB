@@ -9,8 +9,8 @@ import '@openzeppelin/contracts-upgradeable/access/OwnableUpgradeable.sol';
 import 'hardhat/console.sol';
 
 /**
- * @title A ContractA contract for multiple tokens
- */
+ * @title A "ContractA" contract
+ */ 
 contract ContractA is 
     Initializable, 
     OwnableUpgradeable, 
@@ -27,7 +27,7 @@ contract ContractA is
     event Set(address indexed doer, uint256 value);
 
     // ==========Constructor========================================
-    function initialize() external initializer {
+    function initialize() external virtual initializer {
         __Ownable_init();        // initialize the ownable contract with owner
     }
 

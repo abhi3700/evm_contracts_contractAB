@@ -72,7 +72,7 @@ async function main(): Promise<void> {
   // Now, upgrade contract A so that it inherits contractB.
   // We get the contract A to upgrade
   const ContractANewFactory: ContractFactory = await ethers.getContractFactory('ContractANew',);
-  const contractANew: Contract = await upgrades.upgradeProxy(contractA.address, ContractANewFactory/*.connect(ownerA)*/);
+  const contractANew: Contract = await upgrades.upgradeProxy(contractA.address, ContractANewFactory.connect(ownerA));
   console.log("ContractANew upgraded to:", contractANew.address);
   console.log(`The transaction that was sent to the network to deploy the upgraded contract A: ${
           contractANew.deployTransaction.hash}`);

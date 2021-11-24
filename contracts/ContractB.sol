@@ -5,12 +5,12 @@ import '@openzeppelin/contracts/security/Pausable.sol';
 import '@openzeppelin/contracts/access/Ownable.sol';
 // import '@openzeppelin/contracts/access/AccessControl.sol';
 import '@openzeppelin/contracts/utils/Context.sol';
-import '@openzeppelin/contracts/utils/Strings.sol';
+// import '@openzeppelin/contracts/utils/Strings.sol';
 // import '@openzeppelin/contracts-upgradeable/security/PausableUpgradeable.sol';
 // import '@openzeppelin/contracts-upgradeable/utils/math/SafeMathUpgradeable.sol';
 // import '@openzeppelin/contracts-upgradeable/utils/AddressUpgradeable.sol';
 // import '@openzeppelin/contracts-upgradeable/access/AccessControlUpgradeable.sol';
-import '@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol';
+// import '@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol';
 // import '@openzeppelin/contracts-upgradeable/access/OwnableUpgradeable.sol';
 // import '@openzeppelin/contracts-upgradeable/utils/ContextUpgradeable.sol';
 import 'hardhat/console.sol';
@@ -24,10 +24,10 @@ contract ContractB {
 
     // ==========State variables====================================
 
-    address private _admin;
     mapping(bytes32 => mapping(address => bool) ) private _roles;
     bytes32 public constant DEFAULT_ADMIN_ROLE = 0x00;
     bool private initialized;
+    address private _admin;
 
     // ==========Events=============================================
     event AdminAdded(address indexed account, uint256 currentTimestamp);
@@ -46,8 +46,13 @@ contract ContractB {
     //     _roles[DEFAULT_ADMIN_ROLE][msg.sender] = true;
     // }
 
-    function setAdmin() internal {
+    function setAdmin(/*address account*/) internal {
+        // require(account != address(0), "invalid account");
+
         if(initialized) revert();
+
+        // _admin = account;
+        // _roles[DEFAULT_ADMIN_ROLE][account] = true;
 
         _admin = msg.sender;
         _roles[DEFAULT_ADMIN_ROLE][msg.sender] = true;
