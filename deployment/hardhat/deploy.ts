@@ -78,9 +78,12 @@ async function main(): Promise<void> {
           contractANew.deployTransaction.hash}`);
 
   // Change the admin address of contract A to some other address from the access registry.
-  const contractBOwnerAddress: String = await contractB.getOwner();
-  expect(contractBOwnerAddress).to.eq(ownerB.address);
-  console.log(`ContractB Owner: ${contractBOwnerAddress}`);
+  // const contractBOwnerAddress: String = await contractB.getOwner();
+  const contractBOwnerAddress: String = await contractANew.getOwner();
+  expect(contractBOwnerAddress).to.eq(ownerA.address);
+
+  // expect(contractBOwnerAddress).to.eq(ownerB.address);
+  // console.log(`ContractB Owner: ${contractBOwnerAddress}`);
 
   // use some other address like `addr1` from top
   await contractANew.connect(ownerA).transferOwnership(addr1.address);
